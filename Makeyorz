@@ -1,0 +1,10 @@
+PKG_I_START=yorz.i
+ZLIB_INC=
+PNG_INC=-I/include
+JPEG_INC=-I/include
+AVCODEC_INC=
+PKG_I_START=yorz.i
+ZLIB_INC=
+PNG_INC=-I/include
+JPEG_INC=-I/include
+AVCODEC_INC=
