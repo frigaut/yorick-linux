@@ -11,7 +11,7 @@ The list of plugin target currently includes `yutils imutil soy yao ml4 opra spy
   - for yorick-yao: you need the fftw3 and fftw3-single packages
   - for yorick-hdf5: you need the hdf5 libraries, version 1.8 or 1.6
   - you will also need libpng and libjpeg, but these should be installed on regular linux installs
-- Get yorick-macos:
+- Get yorick-linux:
   ```bash
   git clone https://github.com/frigaut/yorick-linux.git
   cd yorick-linux
