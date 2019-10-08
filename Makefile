@@ -83,11 +83,11 @@ clean:
 
 plugins: FORCE
 	mkdir -p plugins
-	$(MAKE) yutils imutil soy yao ml4 opra spydr mpeg z svipc usleep yeti zeromq hdf5
+	$(MAKE) yutils imutil soy yao ml4 opra spydr mpeg z svipc usleep yeti zeromq hdf5 syslog
 
 myplugins: FORCE
 	mkdir -p plugins
-	$(MAKE) yutils imutil soy yao ml4 opra spydr mpeg z svipc usleep yeti zeromq hdf5
+	$(MAKE) yutils imutil soy yao ml4 opra spydr mpeg z svipc usleep yeti zeromq hdf5 syslog
 
 FORCE:
 
@@ -129,6 +129,11 @@ ml4: env
 	@echo; echo '>>> BUILDING $@'
 	$(call init_update_git,yorick-ml4,frigaut)
 	$(MAKE) make_plug PLUG_DIR=yorick-ml4
+
+syslog: env
+	@echo; echo '>>> BUILDING $@'
+	$(call init_update_git,yorick-syslog,frigaut)
+	$(MAKE) make_plug PLUG_DIR=yorick-syslog
 
 opra: env
 	@echo; echo '>>> BUILDING $@'
