@@ -61,7 +61,7 @@ all: env
 yorick: env
 	@echo "Building yorick"
 	if [ -d yorick ]; then cd yorick; git pull origin master; \
-	else git clone git://github.com/dhmunro/yorick.git; fi
+	else git clone git://github.com/LLNL/yorick.git; fi
 	@cd yorick; make config
 	# get the xft patch
 	@cd yorick; cp -p ../yorick-git-xft.patch .

@@ -1,6 +1,6 @@
-diff -uNr yorick.git/gist/gist.c yorick.xft/gist/gist.c
---- yorick.git/gist/gist.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/gist/gist.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/gist/gist.c yorick-build/gist/gist.c
+--- yorick/gist/gist.c	2020-11-17 21:47:00.454732007 +1100
++++ yorick-build/gist/gist.c	2020-11-17 21:47:00.541400404 +1100
 @@ -37,7 +37,7 @@
    { FG_COLOR, M_ASTERISK, 1.0 },                /* marker attributes */
    { FG_COLOR, F_SOLID },                          /* fill attributes */
@@ -18,9 +18,9 @@ diff -uNr yorick.git/gist/gist.c yorick.xft/gist/gist.c
    gistA.t.height= gistA.m.size * DEFAULT_MARKER_SIZE;
    gistA.t.orient= TX_RIGHT;
    gistA.t.alignH= TH_CENTER;
-diff -uNr yorick.git/gist/gist.h yorick.xft/gist/gist.h
---- yorick.git/gist/gist.h	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/gist/gist.h	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/gist/gist.h yorick-build/gist/gist.h
+--- yorick/gist/gist.h	2020-11-17 21:47:00.454732007 +1100
++++ yorick-build/gist/gist.h	2020-11-17 21:47:00.541400404 +1100
 @@ -259,7 +259,8 @@
  
    /* GKS is missing a text opacity flag.  */
@@ -31,9 +31,9 @@ diff -uNr yorick.git/gist/gist.h yorick.xft/gist/gist.h
  /* A font is a type face optionally ORed with T_BOLD and/or T_ITALIC. */
  /* Available point sizes (for X) are 8, 10, 12, 14, 18, and 24 */
  #define T_BOLD 1
-diff -uNr yorick.git/gist/hlevel.c yorick.xft/gist/hlevel.c
---- yorick.git/gist/hlevel.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/gist/hlevel.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/gist/hlevel.c yorick-build/gist/hlevel.c
+--- yorick/gist/hlevel.c	2020-11-17 21:47:00.454732007 +1100
++++ yorick-build/gist/hlevel.c	2020-11-17 21:47:00.541400404 +1100
 @@ -285,7 +285,7 @@
  static GpMarkerAttribs mDefault= { FG_COLOR, 0, 1.0 };
  static GpFillAttribs fDefault= { FG_COLOR, F_SOLID };
@@ -43,9 +43,9 @@ diff -uNr yorick.git/gist/hlevel.c yorick.xft/gist/hlevel.c
  static GaLineAttribs dlDefault= { 0, 0, 0, 0.16, 0.14, 0,
                                      0.13, 0.11375, 1.0, 1.0 };
  static GaVectAttribs vectDefault= { 0, 0.125 };
-diff -uNr yorick.git/gist/xbasic.c yorick.xft/gist/xbasic.c
---- yorick.git/gist/xbasic.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/gist/xbasic.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/gist/xbasic.c yorick-build/gist/xbasic.c
+--- yorick/gist/xbasic.c	2020-11-17 21:47:00.458065407 +1100
++++ yorick-build/gist/xbasic.c	2020-11-17 21:47:00.541400404 +1100
 @@ -191,7 +191,8 @@
  
    /* call p_font before any calls to TextWidth
@@ -123,9 +123,9 @@ diff -uNr yorick.git/gist/xbasic.c yorick.xft/gist/xbasic.c
      }
      len = GxJustifyNext(&text, &ix, &iy);
    } while (len>=0);
-diff -uNr yorick.git/gist/xfancy.c yorick.xft/gist/xfancy.c
---- yorick.git/gist/xfancy.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/gist/xfancy.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/gist/xfancy.c yorick-build/gist/xfancy.c
+--- yorick/gist/xfancy.c	2020-11-17 21:47:00.458065407 +1100
++++ yorick-build/gist/xfancy.c	2020-11-17 21:47:00.541400404 +1100
 @@ -328,8 +328,8 @@
      p_rect(w, 0, 0, fxe->widthButton, fxe->xe.topMargin-1, 0);
      if (fxe->buttonState) HighlightButton(fxe);
@@ -148,9 +148,9 @@ diff -uNr yorick.git/gist/xfancy.c yorick.xft/gist/xfancy.c
    }
  }
  
-diff -uNr yorick.git/i/style.i yorick.xft/i/style.i
---- yorick.git/i/style.i	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/i/style.i	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/i/style.i yorick-build/i/style.i
+--- yorick/i/style.i	2020-11-17 21:47:00.464732207 +1100
++++ yorick-build/i/style.i	2020-11-17 21:47:00.541400404 +1100
 @@ -665,6 +665,7 @@
                            alignV: 0=normal 1=top 2=cap 3=half 4=base 5=bot */
  
@@ -159,10 +159,10 @@ diff -uNr yorick.git/i/style.i yorick.xft/i/style.i
  }
  
  struct GaAxisStyle {
-diff -uNr yorick.git/i0/graph.i yorick.xft/i0/graph.i
---- yorick.git/i0/graph.i	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/i0/graph.i	2013-04-08 15:17:58.000000000 +1000
-@@ -701,6 +701,26 @@
+diff -Naur yorick/i0/graph.i yorick-build/i0/graph.i
+--- yorick/i0/graph.i	2020-11-17 21:47:00.468065607 +1100
++++ yorick-build/i0/graph.i	2020-11-17 21:47:00.541400404 +1100
+@@ -782,6 +782,26 @@
       value can be <0 if the information is unavailable for some reason.
     SEE ALSO: window, limits, plg
   */
@@ -189,7 +189,7 @@ diff -uNr yorick.git/i0/graph.i yorick.xft/i0/graph.i
  
  /*= SECTION(plotter) plotting functions ====================================*/
  
-@@ -1357,6 +1377,20 @@
+@@ -1455,6 +1475,20 @@
       The font keyword may also be an integer: 0 is Courier, 4 is Times,
       8 is Helvetica, 12 is Symbol, 16 is New Century Schoolbook, and
       you add 1 to get boldface and/or 2 to get italic (or oblique).
@@ -210,7 +210,7 @@ diff -uNr yorick.git/i0/graph.i yorick.xft/i0/graph.i
  
       The height is the font size in points; 14.0 is the default.
       X windows only has 8, 10, 12, 14, 18, and 24 point fonts, so
-@@ -1365,10 +1399,11 @@
+@@ -1463,10 +1497,11 @@
  
       By default, opaque=0 and text is transparent.  Set opaque=1 to
       white-out a box before drawing the text.  The default orient
@@ -226,9 +226,9 @@ diff -uNr yorick.git/i0/graph.i yorick.xft/i0/graph.i
  
       The default text justification, justify="NN" is normal is both
       the horizontal and vertical directions.  Other possibilities
-diff -uNr yorick.git/opengl/test3d.c yorick.xft/opengl/test3d.c
---- yorick.git/opengl/test3d.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/opengl/test3d.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/opengl/test3d.c yorick-build/opengl/test3d.c
+--- yorick/opengl/test3d.c	2020-11-17 21:47:00.471399006 +1100
++++ yorick-build/opengl/test3d.c	2020-11-17 21:47:00.541400404 +1100
 @@ -221,7 +221,7 @@
      p_pen(w, 1, P_SOLID);
      seg_draw(w, 0,29, 300,29);
@@ -238,9 +238,30 @@ diff -uNr yorick.git/opengl/test3d.c yorick.xft/opengl/test3d.c
    } else if (gl==glw1) {
      p_glcurrent(gl);
      check_err("on_expose entry");  /* may get error before p_glcurrent */
-diff -uNr yorick.git/play/README yorick.xft/play/README
---- yorick.git/play/README	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/play/README	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/play/play.h yorick-build/play/play.h
+--- yorick/play/play.h	2020-11-17 21:47:00.474732406 +1100
++++ yorick-build/play/play.h	2020-11-17 21:47:00.544733804 +1100
+@@ -164,7 +164,7 @@
+ 
+ /* screen graphics property setting functions */
+ PLUG_API void p_color(p_win *w, p_col_t color);
+-PLUG_API void p_font(p_win *w, int font, int pixsize, int orient);
++PLUG_API void p_font(p_win *w, int font, int pixsize, int orient, char *xftfont);
+ PLUG_API void p_pen(p_win *w, int width, int type);
+ 
+ /* set point list for p_dots, p_lines, p_fill, p_segments (pairs in list)
+@@ -178,7 +178,7 @@
+ PLUG_API void p_d_map(p_win *w, double xt[], double yt[], int set);
+ 
+ /* screen graphics drawing functions */
+-PLUG_API void p_text(p_win *w, int x0, int y0, const char *text, int n);
++PLUG_API void p_text(p_win *w, int x0, int y0, const char *text, int n, int opaque);
+ PLUG_API void p_rect(p_win *w, int x0, int y0, int x1, int y1, int border);
+ PLUG_API void p_ellipse(p_win *w, int x0, int y0, int x1, int y1, int border);
+ PLUG_API void p_dots(p_win *w);
+diff -Naur yorick/play/README yorick-build/play/README
+--- yorick/play/README	2020-11-17 21:47:00.471399006 +1100
++++ yorick-build/play/README	2020-11-17 21:47:00.544733804 +1100
 @@ -561,7 +561,7 @@
  -------graphical output functions
  
@@ -259,30 +280,9 @@ diff -uNr yorick.git/play/README yorick.xft/play/README
    set the current font
    this must be called not only when the font changes, but also
      after any graphics call to any other window has been made
-diff -uNr yorick.git/play/play.h yorick.xft/play/play.h
---- yorick.git/play/play.h	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/play/play.h	2013-04-08 15:17:58.000000000 +1000
-@@ -119,7 +119,7 @@
- 
- /* screen graphics property setting functions */
- PLUG_API void p_color(p_win *w, p_col_t color);
--PLUG_API void p_font(p_win *w, int font, int pixsize, int orient);
-+PLUG_API void p_font(p_win *w, int font, int pixsize, int orient, char *xftfont);
- PLUG_API void p_pen(p_win *w, int width, int type);
- 
- /* set point list for p_dots, p_lines, p_fill, p_segments (pairs in list)
-@@ -133,7 +133,7 @@
- PLUG_API void p_d_map(p_win *w, double xt[], double yt[], int set);
- 
- /* screen graphics drawing functions */
--PLUG_API void p_text(p_win *w, int x0, int y0, const char *text, int n);
-+PLUG_API void p_text(p_win *w, int x0, int y0, const char *text, int n, int opaque);
- PLUG_API void p_rect(p_win *w, int x0, int y0, int x1, int y1, int border);
- PLUG_API void p_ellipse(p_win *w, int x0, int y0, int x1, int y1, int border);
- PLUG_API void p_dots(p_win *w);
-diff -uNr yorick.git/play/win/getdc.c yorick.xft/play/win/getdc.c
---- yorick.git/play/win/getdc.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/play/win/getdc.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/play/win/getdc.c yorick-build/play/win/getdc.c
+--- yorick/play/win/getdc.c	2020-11-17 21:47:00.474732406 +1100
++++ yorick-build/play/win/getdc.c	2020-11-17 21:47:00.544733804 +1100
 @@ -19,7 +19,7 @@
  static void w_font(p_scr *s, HDC dc, int font, int pixsize, int orient);
  
@@ -292,9 +292,9 @@ diff -uNr yorick.git/play/win/getdc.c yorick.xft/play/win/getdc.c
  {
    wp_font(w, font, pixsize, orient);
  }
-diff -uNr yorick.git/play/win/ptext.c yorick.xft/play/win/ptext.c
---- yorick.git/play/win/ptext.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/play/win/ptext.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/play/win/ptext.c yorick-build/play/win/ptext.c
+--- yorick/play/win/ptext.c	2020-11-17 21:47:00.474732406 +1100
++++ yorick-build/play/win/ptext.c	2020-11-17 21:47:00.544733804 +1100
 @@ -12,7 +12,7 @@
  #include "pstdlib.h"
  
@@ -304,9 +304,9 @@ diff -uNr yorick.git/play/win/ptext.c yorick.xft/play/win/ptext.c
  {
    HDC dc = w_getdc(w, 1);
    if (dc) {
-diff -uNr yorick.git/play/x11/connect.c yorick.xft/play/x11/connect.c
---- yorick.git/play/x11/connect.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/play/x11/connect.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/play/x11/connect.c yorick-build/play/x11/connect.c
+--- yorick/play/x11/connect.c	2020-11-17 21:47:00.478065806 +1100
++++ yorick-build/play/x11/connect.c	2020-11-17 21:47:00.544733804 +1100
 @@ -22,7 +22,6 @@
                         int c, int dc);
  static void x_disconnect(x_display *xdpy);
@@ -349,9 +349,9 @@ diff -uNr yorick.git/play/x11/connect.c yorick.xft/play/x11/connect.c
        for (i=0 ; i<=P_NONE ; i++) {
          cur = xdpy->cursors[i];
          xdpy->cursors[i] = None;
-diff -uNr yorick.git/play/x11/playwin.h yorick.xft/play/x11/playwin.h
---- yorick.git/play/x11/playwin.h	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/play/x11/playwin.h	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/play/x11/playwin.h yorick-build/play/x11/playwin.h
+--- yorick/play/x11/playwin.h	2020-11-17 21:47:00.478065806 +1100
++++ yorick-build/play/x11/playwin.h	2020-11-17 21:47:00.544733804 +1100
 @@ -11,7 +11,20 @@
  #include "play.h"
  #include "phash.h"
@@ -388,9 +388,9 @@ diff -uNr yorick.git/play/x11/playwin.h yorick.xft/play/x11/playwin.h
    struct {
      XFontStruct *f;
      int font, pixsize, next;
-diff -uNr yorick.git/play/x11/playx.h yorick.xft/play/x11/playx.h
---- yorick.git/play/x11/playx.h	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/play/x11/playx.h	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/play/x11/playx.h yorick-build/play/x11/playx.h
+--- yorick/play/x11/playx.h	2020-11-17 21:47:00.478065806 +1100
++++ yorick-build/play/x11/playx.h	2020-11-17 21:47:00.544733804 +1100
 @@ -22,6 +22,7 @@
  /* retrieve p_win* given Window id number, Display* (for event handling)
   * - the p_win context can be used to back up the hierarchy further
@@ -399,10 +399,10 @@ diff -uNr yorick.git/play/x11/playx.h yorick.xft/play/x11/playx.h
  extern x_display *x_dpy(Display *dpy);
  extern p_win *x_pwin(x_display *xdpy, Drawable d);
  
-diff -uNr yorick.git/play/x11/textout.c yorick.xft/play/x11/textout.c
---- yorick.git/play/x11/textout.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/play/x11/textout.c	2013-04-08 15:21:48.000000000 +1000
-@@ -10,32 +10,100 @@
+diff -Naur yorick/play/x11/textout.c yorick-build/play/x11/textout.c
+--- yorick/play/x11/textout.c	2020-11-17 21:47:00.478065806 +1100
++++ yorick-build/play/x11/textout.c	2020-11-17 21:51:51.207283389 +1100
+@@ -10,32 +10,102 @@
  
  #include "config.h"
  #include "playx.h"
@@ -420,8 +420,10 @@ diff -uNr yorick.git/play/x11/textout.c yorick.xft/play/x11/textout.c
 +void p_xfttext(p_win *w, int x0, int y0, const char *text, int n, int opaque);
 +char *p_font2xftfont(int font);
 +struct xftcache xftc[N_XFTFONT_CACHE];
++int xft_enabled=1;
++#else
++int xft_enabled=-1;
 +#endif
-+int xft_enabled;
 +
 +
  int
@@ -506,7 +508,7 @@ diff -uNr yorick.git/play/x11/textout.c yorick.xft/play/x11/textout.c
  
    if (s->rotgc || s->tmp || s->image || s->pixmap!=None) x_rotzap(s);
  
-@@ -56,8 +124,112 @@
+@@ -56,8 +126,112 @@
    }
  }
  
@@ -620,7 +622,7 @@ diff -uNr yorick.git/play/x11/textout.c yorick.xft/play/x11/textout.c
  {
    p_scr *s = w->s;
    x_display *xdpy = s->xdpy;
-@@ -67,6 +239,13 @@
+@@ -67,6 +241,13 @@
    Drawable d = w->d;
    int i;
  
@@ -634,7 +636,7 @@ diff -uNr yorick.git/play/x11/textout.c yorick.xft/play/x11/textout.c
    if (s->rotgc || s->tmp || s->image || s->pixmap!=None) x_rotzap(s);
  
    if (n<=0) n = 16350;
-@@ -157,3 +336,99 @@
+@@ -157,3 +338,99 @@
    }
    if (p_signalling) p_abort();
  }
@@ -734,9 +736,9 @@ diff -uNr yorick.git/play/x11/textout.c yorick.xft/play/x11/textout.c
 +}
 +
 +#endif
-diff -uNr yorick.git/yorick/graph.c yorick.xft/yorick/graph.c
---- yorick.git/yorick/graph.c	2013-04-08 15:10:19.000000000 +1000
-+++ yorick.xft/yorick/graph.c	2013-04-08 15:17:58.000000000 +1000
+diff -Naur yorick/yorick/graph.c yorick-build/yorick/graph.c
+--- yorick/yorick/graph.c	2020-11-17 21:47:00.481399206 +1100
++++ yorick-build/yorick/graph.c	2020-11-17 21:47:00.544733804 +1100
 @@ -60,6 +60,7 @@
                             long ix, long ijx, long *nbndy);
  
@@ -754,19 +756,16 @@ diff -uNr yorick.git/yorick/graph.c yorick.xft/yorick/graph.c
  
  /*--------------------------------------------------------------------------*/
  
-@@ -156,6 +157,11 @@
- static void RefMesh(GaQuadMesh *mesh);
+@@ -157,6 +158,8 @@
  
  extern int YCurrentPlotter(void); /* for style.c */
-+#ifdef HAVE_XFT
-+extern int xft_enabled=1;
-+#else
-+extern int xft_enabled=-1;
-+#endif
  
++extern int xft_enabled;
++
  /*--------------------------------------------------------------------------*/
  
-@@ -410,8 +416,14 @@
+ static long yOrigin;
+@@ -412,8 +415,14 @@
        return T_SYMBOL | GetTypeface(&s[6]);
      else if (strncmp(s, "schoolbook", 10)==0)
        return T_NEWCENTURY | GetTypeface(&s[10]);
@@ -783,7 +782,7 @@ diff -uNr yorick.git/yorick/graph.c yorick.xft/yorick/graph.c
    } else {
      return (int)YGetInteger(stack);
    }
-@@ -1486,6 +1498,7 @@
+@@ -1488,6 +1497,7 @@
    Drop(nArgs+convertedZ);
  }
  
@@ -791,7 +790,7 @@ diff -uNr yorick.git/yorick/graph.c yorick.xft/yorick/graph.c
  #undef N_KEYWORDS
  #define N_KEYWORDS 9
  static char *pltKeys[N_KEYWORDS+1]= {
-@@ -1539,10 +1552,15 @@
+@@ -1541,10 +1551,15 @@
      if (gistA.t.orient==1) gistA.t.orient= TX_UP;
      else if (gistA.t.orient==2) gistA.t.orient= TX_LEFT;
      else if (gistA.t.orient==3) gistA.t.orient= TX_DOWN;
@@ -808,7 +807,7 @@ diff -uNr yorick.git/yorick/graph.c yorick.xft/yorick/graph.c
    }
  
    toSys= 0;
-@@ -2135,7 +2153,7 @@
+@@ -2137,7 +2152,7 @@
        else
          YError("failed to create drawing -- Gist work.gs style sheet missing");
      }
@@ -817,7 +816,7 @@ diff -uNr yorick.git/yorick/graph.c yorick.xft/yorick/graph.c
      /* make this window current */
      GhSetPlotter(n);
  
-@@ -2299,6 +2317,23 @@
+@@ -2301,6 +2316,23 @@
    }
  }
  
@@ -841,3 +840,17 @@ diff -uNr yorick.git/yorick/graph.c yorick.xft/yorick/graph.c
  #undef N_KEYWORDS
  #define N_KEYWORDS 2
  static char *hcpKeys[N_KEYWORDS+1]= { "dump", "ps", 0 };
+diff -Naur yorick/ysite.sh yorick-build/ysite.sh
+--- yorick/ysite.sh	2020-11-17 21:47:00.484732606 +1100
++++ yorick-build/ysite.sh	2020-11-17 21:47:00.551400604 +1100
+@@ -1,8 +1,8 @@
+ #!/bin/sh
+-prefix="."
++prefix="/usr"
+ Y_PLATFORM="."
+ Y_SITE="."
+-Y_HOME="relocate"
++Y_HOME="."
+ 
+ # -------------- DO NOT CHANGE THIS LINE OR BELOW -----------------------
+ # ysite.sh -- $Id: ysite.sh,v 1.4 2010-02-28 21:52:28 dhmunro Exp $
