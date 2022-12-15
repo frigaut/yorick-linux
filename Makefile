@@ -44,7 +44,7 @@ env:
 init_update_git =                                               \
 	mkdir -p plugins; cd plugins;                                 \
 	if [ -d $(1) ]; then cd $(1); git reset --hard origin/master; \
-	else git clone git://github.com/$(2)/$(1).git; fi
+	else git clone https://github.com/$(2)/$(1).git; fi
 
 # Targets:
 # make clean to remove all directories to start from scratch
@@ -61,7 +61,7 @@ all: env
 yorick: env
 	@echo "Building yorick"
 	if [ -d yorick ]; then cd yorick; git pull origin master; \
-	else git clone git://github.com/LLNL/yorick.git; fi
+	else git clone https://github.com/LLNL/yorick.git; fi
 	@cd yorick; make config
 	# get the xft patch
 	@cd yorick; cp -p ../yorick-git-xft.patch .
@@ -73,7 +73,7 @@ yorick: env
 	@cd yorick; echo 'XLIB=-lXft' >> Make.cfg
 	@cd yorick; echo 'X11LIB=$(XLIB) -lXft -lX11 -lfontconfig' >> Make.cfg
 	@cd yorick; make; make install
-	cp -p ./scripts/rlwrap yorick/relocate/bin/.
+	# cp -p ./scripts/rlwrap yorick/relocate/bin/.
 	# cp -p ./scripts/yorick.install yorick/relocate/bin/.
 	@echo "Add this line to your ~/.bash_profile:"
 	@echo "export PATH=\"`pwd`/yorick/relocate/bin:\$$PATH\""
