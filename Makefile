@@ -93,10 +93,11 @@ clean:
 # List of all plugins that could be build:
 # yutils imutil soy yao ml4 optimpack vmlmb opra spydr z svipc usleep yeti zeromq hdf5 syslog ca
 # I have removed mpeg as it is not compatible with the new ffmpeg APIs
+# I have also removed syslog and ca as this is so specialised and were mostly related to Gemini.
 
 plugins: FORCE
 	mkdir -p plugins
-	$(MAKE) yutils imutil soy yao ml4 optimpack vmlmb opra spydr z svipc usleep yeti zeromq hdf5 syslog ca
+	$(MAKE) yutils imutil soy yao ml4 optimpack vmlmb opra spydr z svipc usleep yeti zeromq hdf5
 
 myplugins: FORCE
 	mkdir -p plugins
