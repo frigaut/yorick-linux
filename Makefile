@@ -41,10 +41,15 @@ env:
 
 # the following function update the local git repo if it exists,
 # otherwise it clones it from the main repo
-init_update_git =                                               \
-	mkdir -p plugins; cd plugins;                                 \
-	if [ -d $(1) ]; then cd $(1); git reset --hard origin/master; \
-	else git clone https://github.com/$(2)/$(1).git; fi
+init_update_git = \
+	mkdir -p plugins; cd plugins; \
+	if [ -d $(1) ]; then \
+	  cd $(1); \
+		default_branch=$$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); \
+		git reset --hard "$$default_branch"; \
+	else \
+	  git clone git@github.com:$(2)/$(1).git; \
+	fi
 
 # Targets:
 # make clean to remove all directories to start from scratch
@@ -56,9 +61,13 @@ init_update_git =                                               \
 all: env
 	$(MAKE) yorick
 	$(MAKE) plugins
-	$(MAKE) install
+# $(MAKE) install
 
 yorick: env
+	@echo ""
+	@echo "If \"make config\" hangs at \"using FPU_GNU_FENV (SIGFPE delivery)\", you may be on apple hardware";
+	@echo "Try \"export FPU_IGNORE=yes\" before calling \"make yorick\"";
+	@echo ""
 	@echo "Building yorick"
 	if [ -d yorick ]; then cd yorick; git pull origin master; \
 	else git clone https://github.com/LLNL/yorick.git; fi
@@ -81,13 +90,17 @@ yorick: env
 clean:
 	-rm -rf yorick plugins yorick-$(YORICK_VERSION) yorick.pmdoc
 
+# List of all plugins that could be build:
+# yutils imutil soy yao ml4 optimpack vmlmb opra spydr z svipc usleep yeti zeromq hdf5 syslog ca
+# I have removed mpeg as it is not compatible with the new ffmpeg APIs
+
 plugins: FORCE
 	mkdir -p plugins
-	$(MAKE) yutils imutil soy yao ml4 opra spydr mpeg z svipc usleep yeti zeromq hdf5 syslog ca
+	$(MAKE) yutils imutil soy yao ml4 optimpack vmlmb opra spydr z svipc usleep yeti zeromq hdf5 syslog ca
 
 myplugins: FORCE
 	mkdir -p plugins
-	$(MAKE) yutils imutil soy yao ml4 opra spydr mpeg z svipc usleep yeti zeromq hdf5 syslog ca
+	$(MAKE) yutils imutil soy yao ml4 optimpack vmlmb opra spydr z svipc usleep yeti zeromq hdf5
 
 FORCE:
 
@@ -116,6 +129,19 @@ soy: env
 	@echo; echo '>>> BUILDING $@'
 	$(call init_update_git,yorick-soy,frigaut)
 	$(MAKE) make_plug PLUG_DIR=yorick-soy
+
+optimpack: env
+	@echo; echo '>>> BUILDING $@'
+	$(call init_update_git,yorick-optimpack,frigaut)
+	cd plugins/yorick-optimpack; ./autogen.sh; ./configure --prefix="$(PWD)/yorick/relocate"
+	cd plugins/yorick-optimpack; make CFLAGS="-Wno-error=maybe-uninitialized"
+	cd plugins/yorick-optimpack; make install
+
+vmlmb: env
+	@echo; echo '>>> BUILDING $@'
+	$(call init_update_git,yorick-vmlmb,frigaut)
+	cd plugins/yorick-vmlmb/yorick; ./configure
+	cd plugins/yorick-vmlmb/yorick; make install
 
 yao: env
 	@echo; echo '>>> BUILDING $@'
@@ -162,14 +188,14 @@ hdf5: env
 
 mpeg: env
 	@echo; echo '>>> BUILDING $@'
-	$(call init_update_git,yorick-mpeg,dhmunro)
+	$(call init_update_git,yorick-mpeg,frigaut)
 	cd plugins/yorick-mpeg; $(YORICK) -batch make.i
 	# cd plugins/yorick-mpeg; sed -i '' -E 's|#undef HAVE_OSX|#define HAVE_OSX 1 |' config.h
 	$(MAKE) make_plug PLUG_DIR=yorick-mpeg
 
 z: env
 	@echo; echo '>>> BUILDING $@'
-	$(call init_update_git,yorick-z,dhmunro)
+	$(call init_update_git,yorick-z,frigaut)
 	cd plugins/yorick-z; ./configure
 	cd plugins/yorick-z; \
 	echo "PKG_I=zlib.i png.i jpeg.i" > Makeyorz; \
@@ -196,14 +222,11 @@ usleep: env
 
 yeti: env
 	@echo; echo '>>> BUILDING $@'
-	cd plugins; wget http://cral.univ-lyon1.fr/labo/perso/eric.thiebaut/downloads/yorick/yeti-6.3.3.tar.bz2
-	#cd plugins; wget http://www-obs.univ-lyon1.fr/labo/perso/eric.thiebaut/files/yeti-6.3.2.tar.bz2
-	cd plugins; bunzip2 yeti-6.3.3.tar.bz2; tar xvf yeti-6.3.3.tar
-	cd plugins/yeti-6.3.3; ./configure --yorick=$(YORICK)
+	$(call init_update_git,yorick-yeti,frigaut)
+	cd plugins/yorick-yeti; ./configure --yorick=$(YORICK)
 	#yeti_rgl ne compile pas correctement. Le compiler sans optimisation (pas de -O).
 	#cd plugins/yeti-6.3.3/yeti; sed -i '' -E 's|\$\(CFLAGS\) -DYORICK|\$\(CFLAGS\) -O0 -DYORICK |' Makefile
-	cd plugins; rm yeti-6.3.3.tar
-	cd plugins/yeti-6.3.3; make clean; make all; make install
+	cd plugins/yorick-yeti; make clean; make all; make install
 
 check: env
 	# check yorick:
