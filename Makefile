@@ -97,11 +97,11 @@ clean:
 
 plugins: FORCE
 	mkdir -p plugins
-	$(MAKE) yutils imutil soy yao ml4 optimpack vmlmb opra spydr z svipc usleep yeti zeromq hdf5
+	$(MAKE) yutils imutil soy yao ml4 optimpack vmlmb vops opra spydr z svipc usleep yeti zeromq hdf5
 
 myplugins: FORCE
 	mkdir -p plugins
-	$(MAKE) yutils imutil soy yao ml4 optimpack vmlmb opra spydr z svipc usleep yeti zeromq hdf5
+	$(MAKE) yutils imutil soy yao ml4 optimpack vmlmb vops spydr z usleep yeti
 
 FORCE:
 
@@ -143,6 +143,12 @@ vmlmb: env
 	$(call init_update_git,yorick-vmlmb,frigaut)
 	cd plugins/yorick-vmlmb/yorick; ./configure
 	cd plugins/yorick-vmlmb/yorick; make install
+
+vops: env
+	@echo; echo '>>> BUILDING $@'
+	$(call init_update_git,yor-vops,frigaut)
+	cd plugins/yor-vops; ./configure
+	cd plugins/yor-vops; make install
 
 yao: env
 	@echo; echo '>>> BUILDING $@'
