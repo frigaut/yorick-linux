@@ -24,31 +24,41 @@ YORICK_VERSION=2.2
 # Python version that has gtk to run yorick GUIs
 PY_VERSION=2.7
 
+# os:
+# 	echo $(shell uname -m)
+
 # Do not change below:
 # yorick is build relocatable:
 YORICK=$(PWD)/yorick/relocate/bin/yorick
 # build date
 BUILD_DATE=$(shell date)
 YORICK_PKG_VERSION=2
+UNAME_M := $(shell uname -m)
 # YORICK_PKG_VERSION=$(shell echo `cat .yorick_pkg_version`+1 | /usr/bin/bc)
+
+ifeq ($(UNAME_M),aarch64)
+		FPU_IGNORE := yes
+		export FPU_IGNORE
+endif
 
 env:
 	@echo yorick version = $(YORICK_VERSION)
 	@echo package version = $(YORICK_PKG_VERSION)
 	@echo root for external libraries/includes = $(EXT_PREFIX)
 	@echo python version for gtk = $(PY_VERSION)
-	@sleep 2
+	@echo FPU_IGNORE = $(FPU_IGNORE)
+	@sleep 1
 
 # the following function update the local git repo if it exists,
 # otherwise it clones it from the main repo
 init_update_git = \
 	mkdir -p plugins; cd plugins; \
 	if [ -d $(1) ]; then \
-	  cd $(1); \
+		cd $(1); \
 		default_branch=$$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); \
 		git reset --hard "$$default_branch"; \
 	else \
-	  git clone git@github.com:$(2)/$(1).git; \
+		git clone git@github.com:$(2)/$(1).git; \
 	fi
 
 # Targets:
@@ -60,7 +70,8 @@ init_update_git = \
 
 all: env
 	$(MAKE) yorick
-	$(MAKE) plugins
+	$(MAKE) myplugins
+# $(MAKE) plugins
 # $(MAKE) install
 
 yorick: env
@@ -76,7 +87,7 @@ yorick: env
 	@cd yorick; cp -p ../yorick-git-xft.patch .
 	@cd yorick; patch -p1 < yorick-git-xft.patch
 	# @cd yorick/yorick; sed -i '' -E 's|strncpy\(node|memcpy\(node|' codger.c
-	@cd yorick; echo 'COPT_DEFAULT=-O2' >> Make.cfg
+	@cd yorick; echo 'COPT_DEFAULT=-O2 -ffast-math' >> Make.cfg
 	@cd yorick; echo 'Y_CFLAGS=-DHAVE_XFT' >> Make.cfg
 	@cd yorick; echo 'XINC=-I/usr/include/freetype2' >> Make.cfg
 	@cd yorick; echo 'XLIB=-lXft' >> Make.cfg
@@ -147,7 +158,11 @@ vmlmb: env
 vops: env
 	@echo; echo '>>> BUILDING $@'
 	$(call init_update_git,yor-vops,frigaut)
-	cd plugins/yor-vops; ./configure
+ifeq ($(UNAME_M),aarch64)
+	cd plugins/yor-vops; ./configure copt="-O3 -ffast-math"
+else
+	cd plugins/yor-vops; ./configure copt="-O3 -ffast-math"
+endif
 	cd plugins/yor-vops; make install
 
 yao: env
@@ -242,3 +257,9 @@ check: env
 	# echo $(DIRECTORY)
 	# echo $DIRECTORY
 	# $(foreach DIRECTORY, $(DIRECTORY), $(eval $YORICK $(DIRECTORY)))
+
+cleaninstall:
+	rm -i -rf ~/.yorick/relocate
+
+install:
+	cp -i -i -pr ./yorick/relocate/ ~/.yorick/.
