@@ -152,16 +152,16 @@ optimpack: env
 vmlmb: env
 	@echo; echo '>>> BUILDING $@'
 	$(call init_update_git,yorick-vmlmb,frigaut)
-	cd plugins/yorick-vmlmb/yorick; ./configure
+	cd plugins/yorick-vmlmb/yorick; ./configure --yorick=$(YORICK)
 	cd plugins/yorick-vmlmb/yorick; make install
 
 vops: env
 	@echo; echo '>>> BUILDING $@'
 	$(call init_update_git,yor-vops,frigaut)
 ifeq ($(UNAME_M),aarch64)
-	cd plugins/yor-vops; ./configure copt="-O3 -ffast-math"
+	cd plugins/yor-vops; ./configure copt="-O3 -ffast-math" yorick=$(YORICK)
 else
-	cd plugins/yor-vops; ./configure copt="-O3 -ffast-math"
+	cd plugins/yor-vops; ./configure yorick=$(YORICK)
 endif
 	cd plugins/yor-vops; make install
 

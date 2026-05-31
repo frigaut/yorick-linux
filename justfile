@@ -68,8 +68,8 @@ yorick: env
     printf 'export PATH="%s/yorick/relocate/bin:$PATH"\n' "{{justfile_directory()}}"
 
 # Build my standard set of plugins
-# myplugins: yutils imutil soy yao ml4 optimpack vmlmb vops spydr z usleep yeti
-myplugins: z usleep yeti
+myplugins: yutils imutil soy yao ml4 optimpack vmlmb vops spydr z usleep yeti
+# myplugins: z usleep yeti
 
 # Build all supported plugins
 plugins: yutils imutil soy yao ml4 optimpack vmlmb vops opra spydr z svipc usleep yeti zeromq hdf5
