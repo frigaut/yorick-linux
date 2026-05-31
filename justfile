@@ -54,22 +54,24 @@ yorick: env
     fi
     if [ ! -d yorick ]; then
         git clone https://github.com/LLNL/yorick.git
+        # cp -pr ~/Packages/yorick .
         patch -d yorick -p1 < yorick-git-xft.patch
     fi
     cd yorick
-    make config Y_HOME=relocate
+    make config Y_HOME=relocate ysite
+    make config Y_HOME=relocate ysite # this is intentional
     echo 'COPT_DEFAULT=-O2 -ffast-math' >> Make.cfg
     echo 'Y_CFLAGS=-DHAVE_XFT'          >> Make.cfg
     echo 'XINC=-I/usr/include/freetype2' >> Make.cfg
     echo 'XLIB=-lXft'                    >> Make.cfg
     echo "X11LIB=-lXft -lX11 -lfontconfig" >> Make.cfg
-    make && make install
+    make
+    make install
     printf '\nAdd this to your ~/.bash_profile:\n'
     printf 'export PATH="%s/yorick/relocate/bin:$PATH"\n' "{{justfile_directory()}}"
 
 # Build my standard set of plugins
 myplugins: yutils imutil soy yao ml4 optimpack vmlmb vops spydr z usleep yeti
-# myplugins: z usleep yeti
 
 # Build all supported plugins
 plugins: yutils imutil soy yao ml4 optimpack vmlmb vops opra spydr z svipc usleep yeti zeromq hdf5
@@ -106,12 +108,12 @@ optimpack: env
 vmlmb: env
     @printf '\n>>> BUILDING vmlmb\n'
     just init_update_git yorick-vmlmb frigaut
-    cd plugins/yorick-vmlmb/yorick && ./configure && make install
+    cd plugins/yorick-vmlmb/yorick && ./configure --yorick={{YORICK}} && make install
 
 vops: env
     @printf '\n>>> BUILDING vops\n'
     just init_update_git yor-vops frigaut
-    cd plugins/yor-vops && ./configure copt="-O3 -ffast-math" && make install
+    cd plugins/yor-vops && ./configure copt="-O3 -ffast-math" yorick={{YORICK}} && make install
 
 yao: env
     @printf '\n>>> BUILDING yao\n'
